@@ -1,6 +1,5 @@
 # in_memory_database
-Supports
----------
+## Supports
 1. Get
 2. Set
 3. Delete
@@ -9,6 +8,30 @@ Supports
 5. Commit
 
 
-Example
--------
+## Example
+### Simple Set/Get ###
 
+```java
+DataStore dataStore = new DataStore();
+dataStore.set("a", "123");
+dataStore.get("a"); //returns "123"
+```
+### Simple Set/Delete ###
+
+```java
+DataStore dataStore = new DataStore();
+dataStore.set("a", "123");
+dataStore.delete("a");
+dataStore.get("a"); //returns null
+```
+### Simple Transaction rollback ###
+
+```java
+DataStore dataStore = new DataStore();
+dataStore.set("a", "123");
+dataStore.begin();
+dataStore.delete("a");
+dataStore.get("a"); //returns null
+dataStore.rollback();
+dataStore.get("a"); //returns "123"
+```
